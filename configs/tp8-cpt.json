@@ -1,0 +1,66 @@
+{
+  "model": {
+    "name": "FM9G-4B",
+    "path": "${MODEL_DIR}",
+    "layers": 62,
+    "hidden_size": 2560,
+    "num_attention_heads": 40,
+    "num_query_groups": 4,
+    "ffn_hidden_size": 6400,
+    "vocab_size": 73448,
+    "smoke": false,
+    "tie_word_embeddings": true
+  },
+  "task": {
+    "save_checkpoint": false,
+    "collect_step_metrics": true,
+    "profile_enabled": false,
+    "profile_start": 10,
+    "profile_end": 15,
+    "profile_ranks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "profile_shapes": true,
+    "profile_output_dir": "artifacts/profiling",
+    "name": "cpt",
+    "seq_length": 512,
+    "micro_batch_size": 1,
+    "global_batch_size": 16,
+    "train_iters": 15,
+    "lr": 1e-05,
+    "save_interval": 15,
+    "save": "${OUTPUT_DIR}/checkpoints",
+    "load": "",
+    "data_path": "${DATA_DIR}",
+    "synthetic_data": false,
+    "bf16": true,
+    "recompute": true,
+    "eval_iters": 0,
+    "eval_interval": 100,
+    "seed": 1234,
+    "weight_decay": 0.01,
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.0,
+    "distributed_optimizer": true,
+    "gradient_accumulation_steps": 16,
+    "capture_rmsnorm": false
+  },
+  "parallel": {
+    "dp": 1,
+    "tp": 8,
+    "pp": 1,
+    "nnodes": 1,
+    "nproc_per_node": 8
+  },
+  "backend": {
+    "rmsnorm": "native"
+  }
+}

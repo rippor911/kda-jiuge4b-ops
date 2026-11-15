@@ -1,0 +1,42 @@
+diff --git a/megatron/core/optimizer/distrib_optimizer.py b/megatron/core/optimizer/distrib_optimizer.py
+index 782d326..d75ffc3 100644
+--- a/megatron/core/optimizer/distrib_optimizer.py
++++ b/megatron/core/optimizer/distrib_optimizer.py
+@@ -1029,7 +1029,7 @@ class DistributedOptimizer(MixedPrecisionOptimizer):
+ 
+             for s in state_dict_state.values():
+                 # Native PyTorch state dict requires step (i.e., iteration).
+-                s["step"] = step
++                s["step"] = step.clone()
+         elif isinstance(self.optimizer, HybridDeviceOptimizer):
+             # Handle Torch AdamW special case, which, unlike FusedAdam, Torch AdamW
+             # has an extra optimizer state "step".
+@@ -1220,6 +1220,11 @@ class DistributedOptimizer(MixedPrecisionOptimizer):
+                 if isinstance(v, torch.Tensor):
+                     dst_tensors[k] = v
+             for key in dst_tensors:
++                # Torch Adam's scalar step was restored from optimizer metadata,
++                # not from the separate parameter/moment shard.
++                if key == "step" and key not in tensors:
++                    assert dst_tensors[key].numel() == 1 and dst_tensors[key].device.type == "cpu"
++                    continue
+                 if not isinstance(tensors[key], torch.Tensor):
+                     continue
+                 dst_tensors[key].copy_(tensors[key])
+diff --git a/megatron/training/training.py b/megatron/training/training.py
+index 57b8efe..564d82d 100644
+--- a/megatron/training/training.py
++++ b/megatron/training/training.py
+@@ -4615,6 +4615,12 @@ def build_train_valid_test_data_iterators(build_train_valid_test_datasets_provid
+     def _get_iterator(dataloader_type, dataloader):
+         """Return dataset iterator."""
+         if dataloader_type == "single":
++            if args.load and args.num_workers == 0:
++                # Recreating deterministic, zero-worker loaders must not consume
++                # the restored model CPU RNG for unused worker base seeds.
++                with torch.random.fork_rng(devices=[]):
++                    iterator = iter(dataloader)
++                return RerunDataIterator(iterator)
+             return RerunDataIterator(iter(dataloader))
+         elif dataloader_type == "cyclic":
+             return RerunDataIterator(iter(cyclic_iter(dataloader)))

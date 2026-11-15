@@ -1,0 +1,16 @@
+{
+  "baseline_seconds": 8.48337977200281,
+  "b5_seconds": 7.9685043231002055,
+  "b6_seconds": 7.154434197105001,
+  "b6_tokens_per_second": 1145.024159047384,
+  "measurement": "two interleaved quartets; updates1-10 warmup,11-15 synchronized max-rank wall",
+  "long50_pass": true,
+  "resume_pass": true,
+  "evidence_sha256": {
+    "LONG_RESULT.json": "10898c875b7e37a1e8b0e326dcaf0d7ac1c5ff193f27f5659e252a2413b7a3a5",
+    "RESUME_GATE.json": "cd6b24ce0b6bd0a21e08873709ae33f9b3e20c74686b074b412dca86a4243e71",
+    "TIMING_INTEGRITY.json": "d38931c8962b9b87a7b879ae636f5ea4607f0596333cfd3381cd296e5016d776",
+    "AUDIT_RESULT.json": "512d287ff4384b706063d50759846d15e6bea15dc40215412ba3165aededeefc",
+    "VALIDATION_SUMMARY.json": "bb378cf97460115e5996b986dad1ced35bc5b79d1f93871e88c952360baf75cf"
+  }
+}

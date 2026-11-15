@@ -1,0 +1,57 @@
+--- a/src/jiuge_training/model.py
++++ b/src/jiuge_training/model.py
+@@ -143,0 +144,19 @@
++    if os.environ.get('KDA_BDA_MODE', 'off') != 'off':
++        from bda_adapter import attention_bda, mlp_bda
++        layer.submodules.self_attn_bda = attention_bda
++        layer.submodules.mlp_bda = mlp_bda
++    from .gqa_adapter import GQASubgroupSelfAttention, SOURCE_COMPATIBLE
++    layer.submodules.self_attention.module = GQASubgroupSelfAttention
++    import os
++    if SOURCE_COMPATIBLE and os.environ.get('KDA_COMPUTE_MODE', 'off') != 'off':
++        from .compute_adapter import ComputeSelfAttention
++        layer.submodules.self_attention.module = ComputeSelfAttention
++    import os
++    if os.environ.get('KDA_MLP_MODE') == 'r3':
++        from mlp_adapter import DispatchMLP, SOURCE_COMPATIBLE as MLP_COMPATIBLE
++        if MLP_COMPATIBLE:
++            from functools import partial
++            from megatron.core.transformer.mlp import MLP
++            builder = layer.submodules.mlp
++            assert isinstance(builder, partial) and builder.func.__self__ is MLP
++            layer.submodules.mlp = partial(DispatchMLP.as_mlp_submodule, *builder.args, **builder.keywords)
+--- a/src/jiuge_training/train.py
++++ b/src/jiuge_training/train.py
+@@ -145,0 +146,4 @@
++    import gqa_observer
++    if gqa_observer.MODE == 'numeric' and tokens is not None:
++        with (gqa_observer.OUT / f'data-rank{gqa_observer.RANK}.jsonl').open('a') as f:
++            f.write(json.dumps(dict(step=gqa_observer.STEP, tokens=gqa_observer.digest(tokens), labels=gqa_observer.digest(labels), mask=gqa_observer.digest(mask))) + '\n')
+@@ -260,0 +265,2 @@
++        import gqa_observer
++        gqa_observer.attach(model)
+@@ -282,0 +289,2 @@
++            import gqa_observer
++            training_module.train_step = gqa_observer.wrap_step(training_module.train_step)
+@@ -293,8 +301,13 @@
+-        with context:
+-            pretrain(
+-                cfg,
+-                dataset_provider,
+-                ModelType.encoder_or_decoder,
+-                forward_step,
+-                model_provider=tracked_provider,
+-            )
++        try:
++            with context:
++                pretrain(
++                    cfg,
++                    dataset_provider,
++                    ModelType.encoder_or_decoder,
++                    forward_step,
++                    model_provider=tracked_provider,
++                )
++        except SystemExit as exc:
++            # Megatron's requested exit_interval is a successful controlled stop.
++            if exc.code not in (None, 0) or not STEP_RECORDER.rows or not args.exit_interval or STEP_RECORDER.rows[-1]['step'] % args.exit_interval:
++                raise

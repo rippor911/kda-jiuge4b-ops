@@ -1,0 +1,93 @@
+[
+  {
+    "file": "src/adam_candidate.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "9bdf4c4d01e6ebdd1af2a9426b79f240e6eba91c0009dcc708c626377b1ea256",
+    "export_sha256": "9bdf4c4d01e6ebdd1af2a9426b79f240e6eba91c0009dcc708c626377b1ea256",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/optimizer_adapter.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "9ab975902a2f1cc2855851f3cef36c414dc5902438d281bf6474fb22cf71c211",
+    "export_sha256": "9ab975902a2f1cc2855851f3cef36c414dc5902438d281bf6474fb22cf71c211",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/bda_candidate.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "b760597f992e6aa3424479f03ddf1d90da5acd6927f43a1450a6917801e0b2cd",
+    "export_sha256": "2901ec87703ec2059a69b5511fc9fb36405d38c71bd1ea626e49a1f9e09dcb02",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/bda_adapter.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "3e058aecfc9f0021ee21271f249322049a2f58d945151bbed09474c006270fb5",
+    "export_sha256": "3e058aecfc9f0021ee21271f249322049a2f58d945151bbed09474c006270fb5",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/mlp_adapter.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "b9f809e89916a28d54a9f44adffb32d8be16c875a0fd409b3f71a2dc7934f206",
+    "export_sha256": "b9f809e89916a28d54a9f44adffb32d8be16c875a0fd409b3f71a2dc7934f206",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/dispatch_candidate.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "aa9c37047aa954268ab9b8ddc38ace52b01780c5a1f280847b9f7ca370053719",
+    "export_sha256": "aa9c37047aa954268ab9b8ddc38ace52b01780c5a1f280847b9f7ca370053719",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/native_forward.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "388de8e694b6c440cb3ba599848a8a404e84ec6286442c5407eeb29cc496ac14",
+    "export_sha256": "63d4e748e93b9386a1aab1cb6844236bd817125e605bb38d1e27b58f47e290a8",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "src/native_backward.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "52960ee18f3ac41316b444969c6bd7a4af173463e30388c2d63def903fc09647",
+    "export_sha256": "6c46865ac35dd2286923a223263fc4207aec5d57c6b484e39425a6a636baaca9",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "adapters/jiuge_training/gqa_adapter.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "ec81e0fe99df054dcb0269e4696bf9ec98799c98f9f8c1ea621c3073c03991c3",
+    "export_sha256": "ec81e0fe99df054dcb0269e4696bf9ec98799c98f9f8c1ea621c3073c03991c3",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "adapters/jiuge_training/gqa_communication.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "523988e468de86a051a72c0c88f0b8d13086f79d6bbe5a771802582a69f37398",
+    "export_sha256": "523988e468de86a051a72c0c88f0b8d13086f79d6bbe5a771802582a69f37398",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "adapters/jiuge_training/compute_adapter.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "66dabb3c5f0d482216c2db243d5be9cac292566d461418f8f3b4e3692beafaf5",
+    "export_sha256": "66dabb3c5f0d482216c2db243d5be9cac292566d461418f8f3b4e3692beafaf5",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "adapters/jiuge_training/compute_rope.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "05c543a0a2ea102d55a61908869daffbbb712236f2488475ab9342099e33bcda",
+    "export_sha256": "05c543a0a2ea102d55a61908869daffbbb712236f2488475ab9342099e33bcda",
+    "math_ast_unchanged": true
+  },
+  {
+    "file": "adapters/jiuge_training/rope_candidate.py",
+    "source_release": "B6-validated-20261115/payload",
+    "source_sha256": "f566a6ad89ced36e42e2077b95cb2470092a5bbe641719bdcfdade5f0349c280",
+    "export_sha256": "f566a6ad89ced36e42e2077b95cb2470092a5bbe641719bdcfdade5f0349c280",
+    "math_ast_unchanged": true
+  }
+]

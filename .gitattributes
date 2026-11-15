@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# Preserve upstream/generated text and patch context byte-for-byte.
+LICENSES/* -whitespace
+src/native_*.py -whitespace
+patches/*.patch -whitespace

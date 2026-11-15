@@ -1,0 +1,19 @@
+{
+  "primary": "SwiGLU native compiled-kernel host dispatch",
+  "scope": "TP8 BF16 contiguous [512,1,1600], no bias/fp8/offload; native FP32 arithmetic preserved byte-for-byte",
+  "candidate_claim": "Codex host adapter, not a newly invented fused kernel",
+  "sources": {
+    "forward": {
+      "origin": "CoreX 5.0 native SwiGLU compiler output; redistribution clearance pending",
+      "file": "native_forward.py",
+      "sha256": "63d4e748e93b9386a1aab1cb6844236bd817125e605bb38d1e27b58f47e290a8"
+    },
+    "backward": {
+      "origin": "CoreX 5.0 native SwiGLU compiler output; redistribution clearance pending",
+      "file": "native_backward.py",
+      "sha256": "6c46865ac35dd2286923a223263fc4207aec5d57c6b484e39425a6a636baaca9"
+    }
+  },
+  "promotion_gate": "All real-capture F/dX/recompute byte exact; 9 alternating paired samples, median 2F+dX improvement >5%, all paired improvements positive, median gap >3*max(MAD). Full training only if passed.",
+  "max_attempts": 3
+}
